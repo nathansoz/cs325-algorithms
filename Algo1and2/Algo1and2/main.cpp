@@ -50,27 +50,51 @@ std::vector <int> getRidOfCrap(std::string &tempString)
 int main()
 {
 	std::ifstream file;
-
 	std::ofstream outFile;
 	clock_t start, end;
 	double clockTime;
 	std::vector <int> arrToTest;
 	std::string str;
+	int choice;
 
+	/*Using test problems for now
+	Need random large arrays for questions*/
 	file.open("MSS_TestProblems.txt");
 	outFile.open("results.txt");
 
 	if (file.is_open())
 	{
-		while (!file.eof())
+		do
 		{
-			std::getline(file, str);
-			arrToTest = getRidOfCrap(str);
-			enumFunction(arrToTest, arrToTest.size());
-		}
+			/*MENU*/
+			std::cout << "Please choose from the following options:\n\n"
+				<< "1. Run Enumeration Algorithm\n"
+				<< "2. Run Better Enumeration Algorithm\n"
+				<< "3. Run 3rd Algo\n" //will update
+				<< "4. Run 4th Algo\n" //will update
+				<< "5. Quit\n\n"
+				<< "Enter your choice: ";
+			std::cin >> choice;
+
+			switch (choice)
+			{
+			case 1: 
+			}
+
+
+			while (!file.eof())
+			{
+				std::getline(file, str);
+				arrToTest = getRidOfCrap(str);
+				enumFunction(arrToTest, arrToTest.size());
+			}
+		} while (choice != 5);
 	}
 	else
 		std::cout << "Error!\n";
+
+	file.close();
+	outFile.close();
 
 
 	return 0;

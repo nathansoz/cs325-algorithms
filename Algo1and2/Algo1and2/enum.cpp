@@ -1,19 +1,41 @@
 /**********************************************************************
 File: enum.cpp
 
+Description: 
+
+**************************************************************************/
+
+#include "enum.h"
+#include <iostream>
+#include <vector>
+#include <ctime>
+#include <fstream>
+
+/***************************************************************************
+Function: runEnum
+
+Description: Calculates the sum of an array by looping over indices i
+and j. Also calculates runtime of the function.
+
+Parameters: vector of integers, size of vector
+
+Pre-Conditions:
+****************************************************************************/
+void runEnum(std::ifstream &file, std::vector <int> vec)
+{
+
+}
+
+/***************************************************************************
+Function: enumFunction
+
 Description: Calculates the sum of an array by looping over indices i
 and j. Also calculates runtime of the function.
 
 Parameters: vector of integers, size of vector
 
 Pre-Conditions: 
-
-*/
-
-#include "enum.h"
-#include <iostream>
-#include <vector>
-#include <ctime>
+****************************************************************************/
 
 void enumFunction(std::vector <int> vec, int size)
 {
@@ -22,14 +44,21 @@ void enumFunction(std::vector <int> vec, int size)
 	clock_t startClock, endClock;
 
 	startClock = clock();
+
+	/*Iterate through array*/
 	for (int i = 0; i < size; i++)
 	{
+		/*Reset newSum*/
 		newSum = 0;
+
+		/*Go through array from i onward*/
 		for (int j = i; j < size; j++)
 		{
+			/*Calculate newSum*/
 			for (i; i <= j; i++)
 				newSum += vec[i];
 
+			/*If we have a new max sum*/
 			if (newSum > max)
 			{
 				start = i;
