@@ -37,13 +37,9 @@ Parameters: vector of integers, size of vector
 Pre-Conditions: 
 ****************************************************************************/
 
-void enumFunction(std::vector <int> vec, int size)
+int enumFunction(std::vector <int> vec, int size)
 {
 	int max = 0, newSum = 0, start = 0, end = 0;
-	double time = 0;
-	clock_t startClock, endClock;
-
-	startClock = clock();
 
 	/*Iterate through array*/
 	for (int i = 0; i < size; i++)
@@ -67,8 +63,6 @@ void enumFunction(std::vector <int> vec, int size)
 			}
 		}
 	}
-	endClock = clock();
 
-	time = ((double)(endClock - startClock)/CLOCKS_PER_SEC);
-	std::cout << time << std::endl;
+	return max;
 }
