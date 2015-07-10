@@ -1,3 +1,3 @@
 #include <vector>
 
-long linear(std::vector<int> array);
+int linear(std::vector<int> array);

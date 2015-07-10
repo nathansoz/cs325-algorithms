@@ -1,3 +1,3 @@
 #include <vector>
 
-void betterEnumFunction(std::vector <int> vec, int size);
+void betterEnumFunction(std::vector<int> vec, int size);

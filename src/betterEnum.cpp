@@ -10,7 +10,7 @@ Pre-Conditions:
 
 **************************************************************************/
 
-#include "betterEnum.h"
+#include "../include/betterEnum.h"
 #include <iostream>
 #include <vector>
 #include <ctime>
