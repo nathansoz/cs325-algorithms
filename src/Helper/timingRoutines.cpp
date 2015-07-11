@@ -35,6 +35,6 @@ void Helper::ClockMSSFunction(int (*timeFun)(std::vector<int>, int), std::vector
     std::clock_t start = std::clock();
     int result = timeFun(*numbers, numInts);
     std::clock_t total = std::clock() - start;
-    std::cout << "Result: " << result << " Total clocks: " << total << '\n';
+    std::cout << "N: " << numInts << " Result: " << result << " Total clocks: " << total << '\n';
 
 }
