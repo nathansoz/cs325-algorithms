@@ -66,6 +66,16 @@ int main()
         Helper::ClockMSSFunction(funPtr1, randNums);
     }
 
+    std::cout << "Running timing function for betterEnumFunction: " << std::endl;
+    int betterEnumValsN[] = {1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800};
+
+    for(int i = 0; i < 10; i++)
+    {
+        std::vector<int>* randNums = Helper::GenRandNums(betterEnumValsN[i]);
+        int(*funPtr1)(std::vector<int>) = &betterEnumFunction;
+        Helper::ClockMSSFunction(funPtr1, randNums);
+    }
+
 
 	return 0;
 }
