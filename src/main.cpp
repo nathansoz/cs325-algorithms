@@ -67,7 +67,7 @@ int main()
     }
 
     std::cout << "Running timing function for betterEnumFunction: " << std::endl;
-    int betterEnumValsN[] = {5000, 5200, 5400, 5600, 5800, 6000, 6200, 6400, 6600, 6800};
+    int betterEnumValsN[] = {15000, 20000, 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000};
 
     for(int i = 0; i < 10; i++)
     {
