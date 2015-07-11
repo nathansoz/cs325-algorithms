@@ -56,7 +56,7 @@ std::vector<std::vector<int>*>* Helper::processMSSFile(std::ifstream &inStream)
     std::vector<std::vector<int>*>* convertedLines = new std::vector<std::vector<int>*>();
     std::vector<std::string>* MSSFileLines = Helper::readLinesFromFile(inStream);
 
-    for(int i = 0; i < MSSFileLines->size(); i++)
+    for(uint i = 0; i < MSSFileLines->size(); i++)
     {
         Helper::stripBrackets(MSSFileLines->at(i));
         convertedLines->push_back(Helper::csvToInt(MSSFileLines->at(i)));
