@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
 
 #include "../include/enum.h"
 #include "../include/betterEnum.h"
@@ -10,13 +11,22 @@
 
 int main()
 {
-	std::ifstream test;
-	test.open("/tmp/test.txt");
-    std::ofstream out;
-    out.open("/tmp/outLinear.txt");
-	std::vector<std::vector<int>*>* processedInts = Helper::processMSSFile(test);
+	std::ifstream input;
+	input.open("MSS_TestProblems.txt");
+    if(!input.is_open())
+    {
+        input.close();
+        std::cout << "MSS_TestProblems.txt not found in current directory. Now exiting." << std::endl;
+        exit(1);
+    }
 
-	std::cout << "Results of enumFunction: \n";
+    std::ofstream out;
+    out.open("MSS_TestResults.txt");
+
+	std::vector<std::vector<int>*>* processedInts = Helper::processMSSFile(input);
+    input.close();
+
+	out << "Results of enumFunction: \n";
 	for(int i = 0; i < processedInts->size(); i++)
 	{
         int start;
@@ -26,7 +36,7 @@ int main()
         std::cout << '\n';
 	}
 
-	std::cout << "Results of betterEnumFunction: \n";
+	out << "Results of betterEnumFunction: \n";
 	for(int i = 0; i < processedInts->size(); i++)
 	{
         int start;
@@ -35,7 +45,7 @@ int main()
         Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
         std::cout << '\n';
 	}
-	std::cout << "Results of linear function: \n";
+	out << "Results of linear function: \n";
 	for(int i = 0; i < processedInts->size(); i++)
 	{
         int start;
@@ -53,10 +63,5 @@ int main()
     int(*funPtr1)(std::vector<int>) = &enumFunction;
     Helper::ClockMSSFunction(funPtr1, randNums);
 
-
-
-
-
-	test.close();
 	return 0;
 }
