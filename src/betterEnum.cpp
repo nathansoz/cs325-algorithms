@@ -10,7 +10,7 @@ Pre-Conditions:
 
 **************************************************************************/
 
-#include "../include/betterEnum.h"
+#include "betterEnum.h"
 #include <iostream>
 #include <vector>
 #include <ctime>
@@ -18,7 +18,7 @@ Pre-Conditions:
 
 int betterEnumFunction(std::vector <int> vec, int size)
 {
-	int max = 0, newSum = 0, start = 0, end = 0;
+	int max = 0, newSum = 0;
 
 	/*Iterate through array*/
 	for (int i = 0; i < size; i++)
@@ -32,11 +32,8 @@ int betterEnumFunction(std::vector <int> vec, int size)
 
 			/*If we have a new max sum*/
 			if (newSum > max)
-			{
-				start = i;
-				end = j;
+
 				max = newSum;
-			}
 		}
 	}
 

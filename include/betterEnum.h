@@ -1,5 +1,3 @@
-#pragma once
-
 #include <vector>
 
-int betterEnumFunction(std::vector<int> vec, int size);
+int betterEnumFunction(std::vector <int> vec, int size);
