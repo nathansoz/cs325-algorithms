@@ -26,10 +26,10 @@ void Helper::stripBrackets(std::string &stripString)
 
     for(int i = 0; i < stripString.length(); i++)
     {
-        if(stripString.at(i) == '[' || stripString.at(i) == ']')
+        if(stripString.at((unsigned)i) == '[' || stripString.at((unsigned)i) == ']')
             continue;
         else
-            retString += stripString.at(i);
+            retString += stripString.at((unsigned)i);
     }
 
     stripString = retString;
@@ -69,12 +69,12 @@ void Helper::WriteResultsToFile(std::ofstream &outStream, std::vector<int>& resu
 {
     outStream << "[";
     for(int i = 0; i < results.size() - 1; i++)
-        outStream << results.at(i) << ", ";
+        outStream << results.at((unsigned)i) << ", ";
     outStream << results.at(results.size() - 1) << "]" << std::endl;
 
     outStream << "[";
     for(int i = start; i < end; i++)
-        outStream << results.at(i) << ", ";
-    outStream << results.at(end) << ']' << std::endl;
+        outStream << results.at((unsigned)i) << ", ";
+    outStream << results.at((unsigned)end) << ']' << std::endl;
     outStream << total << std::endl;
 }
