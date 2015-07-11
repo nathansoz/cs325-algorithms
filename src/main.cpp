@@ -27,7 +27,7 @@ int main()
     input.close();
 
 	out << "Results of enumFunction: \n";
-	for(int i = 0; i < processedInts->size(); i++)
+	for(uint i = 0; i < processedInts->size(); i++)
 	{
         int start;
         int end;
@@ -37,7 +37,7 @@ int main()
 	}
 
 	out << "Results of betterEnumFunction: \n";
-	for(int i = 0; i < processedInts->size(); i++)
+	for(uint i = 0; i < processedInts->size(); i++)
 	{
         int start;
         int end;
@@ -46,7 +46,7 @@ int main()
         std::cout << '\n';
 	}
 	out << "Results of linear function: \n";
-	for(int i = 0; i < processedInts->size(); i++)
+	for(uint i = 0; i < processedInts->size(); i++)
 	{
         int start;
         int end;
