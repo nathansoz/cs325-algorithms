@@ -6,6 +6,7 @@
 #include "../include/betterEnum.h"
 #include "../include/linear.h"
 #include "../include/Helper/fileUtils.h"
+#include "../include/Helper/timingRoutines.h"
 
 int main()
 {
@@ -33,6 +34,15 @@ int main()
 		std::cout << linear(*(processedInts->at(i)));
 		std::cout << '\n';
 	}
+
+
+    std::vector<int>* randNums = Helper::GenRandNums(250);
+
+
+    int(*funPtr1)(std::vector<int>, int) = &enumFunction;
+    Helper::ClockMSSFunction(funPtr1, randNums, 10000);
+
+
 
 
 
