@@ -3,4 +3,5 @@
 
 void runEnum(std::ifstream &file, std::vector <int> vec);
 
-int enumFunction(std::vector <int> vec, int size);
+int enumFunction(std::vector <int> vec);
+int enumFunction(std::vector <int> vec, int &start, int &end);

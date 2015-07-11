@@ -2,6 +2,7 @@
 #include <string>
 #include <string.h>
 #include <vector>
+#include <iostream>
 
 #include "../../include/Helper/fileUtils.h"
 
@@ -64,3 +65,16 @@ std::vector<std::vector<int>*>* Helper::processMSSFile(std::ifstream &inStream)
     return convertedLines;
 }
 
+void Helper::WriteResultsToFile(std::ofstream &outStream, std::vector<int>& results, int start, int end, int total)
+{
+    outStream << "[";
+    for(int i = 0; i < results.size() - 1; i++)
+        outStream << results.at(i) << ", ";
+    outStream << results.at(results.size() - 1) << "]" << std::endl;
+
+    outStream << "[";
+    for(int i = start; i < end; i++)
+        outStream << results.at(i) << ", ";
+    outStream << results.at(end) << ']' << std::endl;
+    outStream << total << std::endl;
+}

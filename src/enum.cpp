@@ -22,7 +22,7 @@ Parameters: vector of integers, size of vector
 Pre-Conditions: 
 ****************************************************************************/
 
-int enumFunction(std::vector <int> vec, int size)
+int enumFunction(std::vector <int> vec)
 {
 	int max = 0, newSum = 0;
 
@@ -43,6 +43,41 @@ int enumFunction(std::vector <int> vec, int size)
 			if (newSum > max)
 				max = newSum;
 		}
+	}
+
+	return max;
+}
+
+int enumFunction(std::vector <int> vec, int &start, int &end)
+{
+	int max = 0, newSum = 0;
+	start = 0;
+	end = 0;
+
+	/*Iterate through array*/
+	for (int i = 0; i < vec.size(); i++)
+	{
+		/*Go through array from i onward*/
+		for (int j = i; j < vec.size(); j++)
+		{
+			/*Reset newSum*/
+			newSum = 0;
+			/*Calculate newSum*/
+			for (int k = i; k <= j; k++)
+			{
+				newSum += vec[k];
+			}
+
+			/*If we have a new max sum*/
+			if (newSum > max)
+			{
+				max = newSum;
+				start = i;
+				end = j;
+			}
+		}
+
+
 	}
 
 	return max;

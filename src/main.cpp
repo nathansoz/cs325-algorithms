@@ -12,35 +12,46 @@ int main()
 {
 	std::ifstream test;
 	test.open("/tmp/test.txt");
+    std::ofstream out;
+    out.open("/tmp/outLinear.txt");
 	std::vector<std::vector<int>*>* processedInts = Helper::processMSSFile(test);
 
 	std::cout << "Results of enumFunction: \n";
 	for(int i = 0; i < processedInts->size(); i++)
 	{
-		std::cout << enumFunction(*(processedInts->at(i)), processedInts->at(i)->size());
-		std::cout << '\n';
+        int start;
+        int end;
+        int total = enumFunction(*(processedInts->at(i)), start, end);
+        Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
+        std::cout << '\n';
 	}
 
 	std::cout << "Results of betterEnumFunction: \n";
 	for(int i = 0; i < processedInts->size(); i++)
 	{
-		std::cout << betterEnumFunction(*(processedInts->at(i)), processedInts->at(i)->size());
-		std::cout << '\n';
+        int start;
+        int end;
+        int total = betterEnumFunction(*(processedInts->at(i)), start, end);
+        Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
+        std::cout << '\n';
 	}
-
 	std::cout << "Results of linear function: \n";
 	for(int i = 0; i < processedInts->size(); i++)
 	{
-		std::cout << linear(*(processedInts->at(i)));
+        int start;
+        int end;
+        int total = linear(*(processedInts->at(i)), start, end);
+        Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
 		std::cout << '\n';
 	}
+    out.close();
 
 
     std::vector<int>* randNums = Helper::GenRandNums(250);
 
 
-    int(*funPtr1)(std::vector<int>, int) = &enumFunction;
-    Helper::ClockMSSFunction(funPtr1, randNums, 10000);
+    int(*funPtr1)(std::vector<int>) = &enumFunction;
+    Helper::ClockMSSFunction(funPtr1, randNums);
 
 
 

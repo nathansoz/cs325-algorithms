@@ -16,16 +16,16 @@ Pre-Conditions:
 #include <ctime>
 #include <fstream>
 
-int betterEnumFunction(std::vector <int> vec, int size)
+int betterEnumFunction(std::vector <int> vec)
 {
 	int max = 0, newSum = 0;
 
 	/*Iterate through array*/
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < vec.size(); i++)
 	{
 		/*Reset newSum*/
 		newSum = 0;
-		for (int j = i; j < size; j++)
+		for (int j = i; j < vec.size(); j++)
 		{
 			/*Calculate newSum*/
 			newSum += vec[j];
@@ -34,6 +34,34 @@ int betterEnumFunction(std::vector <int> vec, int size)
 			if (newSum > max)
 
 				max = newSum;
+		}
+	}
+
+	return max;
+}
+
+int betterEnumFunction(std::vector <int> vec, int &start, int &end)
+{
+	int max = 0, newSum = 0;
+	start = 0;
+	end = 0;
+	/*Iterate through array*/
+	for (int i = 0; i < vec.size(); i++)
+	{
+		/*Reset newSum*/
+		newSum = 0;
+		for (int j = i; j < vec.size(); j++)
+		{
+			/*Calculate newSum*/
+			newSum += vec[j];
+
+			/*If we have a new max sum*/
+			if (newSum > max)
+			{
+				max = newSum;
+				start = i;
+				end = j;
+			}
 		}
 	}
 

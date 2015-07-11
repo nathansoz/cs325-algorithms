@@ -9,4 +9,5 @@ namespace Helper
     std::vector<std::string>* readLinesFromFile(std::ifstream&);
     void stripBrackets(std::string&);
     std::vector<int>* csvToInt(std::string&);
+    void WriteResultsToFile(std::ofstream &outStream, std::vector<int>& results, int start, int end, int total);
 }
