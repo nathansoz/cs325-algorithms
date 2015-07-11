@@ -24,12 +24,12 @@ void Helper::stripBrackets(std::string &stripString)
 {
     std::string retString;
 
-    for(int i = 0; i < stripString.length(); i++)
+    for(uint i = 0; i < stripString.length(); i++)
     {
-        if(stripString.at((unsigned)i) == '[' || stripString.at((unsigned)i) == ']')
+        if(stripString.at(i) == '[' || stripString.at(i) == ']')
             continue;
         else
-            retString += stripString.at((unsigned)i);
+            retString += stripString.at(i);
     }
 
     stripString = retString;
@@ -68,13 +68,13 @@ std::vector<std::vector<int>*>* Helper::processMSSFile(std::ifstream &inStream)
 void Helper::WriteResultsToFile(std::ofstream &outStream, std::vector<int>& results, int start, int end, int total)
 {
     outStream << "[";
-    for(int i = 0; i < results.size() - 1; i++)
-        outStream << results.at((unsigned)i) << ", ";
+    for(uint i = 0; i < results.size() - 1; i++)
+        outStream << results.at(i) << ", ";
     outStream << results.at(results.size() - 1) << "]" << std::endl;
 
     outStream << "[";
-    for(int i = start; i < end; i++)
-        outStream << results.at((unsigned)i) << ", ";
+    for(uint i = (unsigned)start; i < end; i++)
+        outStream << results.at(i) << ", ";
     outStream << results.at((unsigned)end) << ']' << std::endl;
     outStream << total << std::endl;
 }
