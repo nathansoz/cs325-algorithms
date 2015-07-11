@@ -76,6 +76,16 @@ int main()
         Helper::ClockMSSFunction(funPtr1, randNums);
     }
 
+    std::cout << "Running timing function for linear: " << std::endl;
+    int linearN[] = {100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000, 900000, 1000000};
+
+    for(int i = 0; i < 10; i++)
+    {
+        std::vector<int>* randNums = Helper::GenRandNums(linearN[i]);
+        int(*funPtr1)(std::vector<int>) = &linear;
+        Helper::ClockMSSFunction(funPtr1, randNums);
+    }
+
 
 	return 0;
 }
