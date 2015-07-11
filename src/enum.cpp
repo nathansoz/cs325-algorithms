@@ -10,6 +10,7 @@ Description:
 #include <vector>
 #include <ctime>
 #include <fstream>
+#include <stdlib.h>
 
 /***************************************************************************
 Function: enumFunction
@@ -27,16 +28,16 @@ int enumFunction(std::vector <int> vec)
 	int max = 0, newSum = 0;
 
 	/*Iterate through array*/
-	for (int i = 0; i < vec.size(); i++)
+	for (uint i = 0; i < vec.size(); i++)
 	{
 		/*Go through array from i onward*/
-		for (int j = i; j < vec.size(); j++)
+		for (uint j = i; j < vec.size(); j++)
 		{
 			/*Reset newSum*/
 			newSum = 0;
 
 			/*Calculate newSum*/
-			for (int k = i; k <= j; k++)
+			for (uint k = i; k <= j; k++)
 				newSum += vec[k];
 
 			/*If we have a new max sum*/
@@ -55,15 +56,15 @@ int enumFunction(std::vector <int> vec, int &start, int &end)
 	end = 0;
 
 	/*Iterate through array*/
-	for (int i = 0; i < vec.size(); i++)
+	for (uint i = 0; i < vec.size(); i++)
 	{
 		/*Go through array from i onward*/
-		for (int j = i; j < vec.size(); j++)
+		for (uint j = i; j < vec.size(); j++)
 		{
 			/*Reset newSum*/
 			newSum = 0;
 			/*Calculate newSum*/
-			for (int k = i; k <= j; k++)
+			for (uint k = i; k <= j; k++)
 			{
 				newSum += vec[k];
 			}
