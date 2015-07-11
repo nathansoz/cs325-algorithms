@@ -73,7 +73,7 @@ void Helper::WriteResultsToFile(std::ofstream &outStream, std::vector<int>& resu
     outStream << results.at(results.size() - 1) << "]" << std::endl;
 
     outStream << "[";
-    for(uint i = (unsigned)start; i < end; i++)
+    for(uint i = (unsigned)start; i < (unsigned)end; i++)
         outStream << results.at(i) << ", ";
     outStream << results.at((unsigned)end) << ']' << std::endl;
     outStream << total << std::endl;
