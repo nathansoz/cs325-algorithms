@@ -9,7 +9,7 @@ int linear(std::vector<int> array)
 	int maxToReturn = 0;
 
 
-        for(int i = 0; i < array.size(); i++)
+        for(uint i = 0; i < array.size(); i++)
 	{
         maxToPoint = std::max(0, maxToPoint + array[i]);
 		maxToReturn = std::max(maxToPoint, maxToReturn);
@@ -26,7 +26,7 @@ int linear(std::vector<int> array, int &start, int &end)
     start = 0;
     end = 0;
 
-    for(int i = 0; i < array.size(); i++)
+    for(uint i = 0; i < array.size(); i++)
     {
         if((maxToPoint + array[i]) < 0)
         {
