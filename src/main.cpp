@@ -57,9 +57,9 @@ int main()
     out.close();
 
     std::cout << "Running timing function for enumFunction: " << std::endl;
-    int enumValsN[] = {1000, 1500, 2000, 2500, 3000, 3500, 4000};
+    int enumValsN[] = {1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800};
 
-    for(int i = 0; i < 7; i++)
+    for(int i = 0; i < 10; i++)
     {
         std::vector<int>* randNums = Helper::GenRandNums(enumValsN[i]);
         int(*funPtr1)(std::vector<int>) = &enumFunction;
