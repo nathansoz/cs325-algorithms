@@ -5,7 +5,7 @@ Description:
 
 **************************************************************************/
 
-#include "enum.h"
+#include "../include/enum.h"
 #include <iostream>
 #include <vector>
 #include <ctime>
