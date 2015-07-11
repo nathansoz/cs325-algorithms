@@ -26,15 +26,6 @@ void Helper::ClockMSSFunction(int (*timeFun)(std::vector<int>), std::vector<int>
     std::clock_t start = std::clock();
     int result =timeFun(*numbers);
     double total = (std::clock() - start) / (double) CLOCKS_PER_SEC;
-    std::cout << "N: " << numbers->size() << " Result: " << result << " Total clocks: " << total << '\n';
-
-}
-
-void Helper::ClockMSSFunction(int (*timeFun)(std::vector<int>, int), std::vector<int>* numbers, int numInts)
-{
-    std::clock_t start = std::clock();
-    int result = timeFun(*numbers, numInts);
-    std::clock_t total = std::clock() - start;
-    std::cout << "N: " << numInts << " Result: " << result << " Total clocks: " << total << '\n';
+    std::cout << "N: " << numbers->size() << " Result: " << result << " CPU Seconds: " << total << '\n';
 
 }
