@@ -61,7 +61,7 @@ std::vector<std::vector<int>*>* Helper::processMSSFile(std::ifstream &inStream)
         Helper::stripBrackets(MSSFileLines->at(i));
         convertedLines->push_back(Helper::csvToInt(MSSFileLines->at(i)));
     }
-
+    delete MSSFileLines;
     return convertedLines;
 }
 

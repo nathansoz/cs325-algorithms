@@ -10,10 +10,12 @@
 #include "../include/Helper/fileUtils.h"
 #include "../include/Helper/timingRoutines.h"
 
+#define RUN_TESTS 0
+
 int main()
 {
-	std::ifstream input;
-	input.open("MSS_TestProblems.txt");
+    std::ifstream input;
+    input.open("MSS_TestProblems.txt");
     if(!input.is_open())
     {
         input.close();
@@ -24,48 +26,56 @@ int main()
     std::ofstream out;
     out.open("MSS_TestResults.txt");
 
-	std::vector<std::vector<int>*>* processedInts = Helper::processMSSFile(input);
+    std::vector<std::vector<int>*>* processedInts = Helper::processMSSFile(input);
     input.close();
 
-	out << "Results of enumFunction: \n";
-	for(uint i = 0; i < processedInts->size(); i++)
-	{
+    out << "Results of enumFunction: \n";
+    for(uint i = 0; i < processedInts->size(); i++)
+    {
         int start;
         int end;
         int total = enumFunction(*(processedInts->at(i)), start, end);
         Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
         std::cout << '\n';
-	}
+    }
 
-	out << "Results of betterEnumFunction: \n";
-	for(uint i = 0; i < processedInts->size(); i++)
-	{
+    out << "Results of betterEnumFunction: \n";
+    for(uint i = 0; i < processedInts->size(); i++)
+    {
         int start;
         int end;
         int total = betterEnumFunction(*(processedInts->at(i)), start, end);
         Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
         std::cout << '\n';
-	}
-        out << "Results of D&C function: \n";
-        for(uint i = 0; i < processedInts->size(); i++)
-        {
+    }
+
+    out << "Results of D&C function: \n";
+    for(uint i = 0; i < processedInts->size(); i++)
+    {
         int start;
         int end;
         int total = divAndC(*(processedInts->at(i)), start, end);
         Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
         std::cout << '\n';
-        }
-	out << "Results of linear function: \n";
-	for(uint i = 0; i < processedInts->size(); i++)
-	{
+    }
+    
+    out << "Results of linear function: \n";
+    for(uint i = 0; i < processedInts->size(); i++)
+    {
         int start;
         int end;
         int total = linear(*(processedInts->at(i)), start, end);
         Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
 		std::cout << '\n';
-	}
+    }
     out.close();
 
+    //Clean up memory
+    for(uint i = 0; i < processedInts->size(); i++)
+        delete processedInts->at(i);
+    delete processedInts;
+
+#if RUN_TESTS == 1
     std::cout << "Running timing function for enumFunction: " << std::endl;
     int enumValsN[] = {1000, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800};
 
@@ -107,7 +117,7 @@ int main()
         Helper::ClockMSSFunction(funPtr1, randNums);
     }
 
+#endif
 
-
-	return 0;
+    return 0;
 }
