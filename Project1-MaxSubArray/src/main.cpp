@@ -15,16 +15,16 @@
 int main()
 {
     std::ifstream input;
-    input.open("MSS_TestProblems.txt");
+    input.open("MSS_Problems.txt");
     if(!input.is_open())
     {
         input.close();
-        std::cout << "MSS_TestProblems.txt not found in current directory. Now exiting." << std::endl;
+        std::cout << "MSS_Problems.txt not found in current directory. Now exiting." << std::endl;
         exit(1);
     }
 
     std::ofstream out;
-    out.open("MSS_TestResults.txt");
+    out.open("MSS_Results.txt");
 
     std::vector<std::vector<int>*>* processedInts = Helper::processMSSFile(input);
     input.close();
@@ -65,7 +65,7 @@ int main()
         Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
     }
     out.close();
-    std::cout << "Wrote results to MSS_TestResults.txt" << std::endl;
+    std::cout << "Wrote results to MSS_Results.txt" << std::endl;
     //Clean up memory
     for(uint i = 0; i < processedInts->size(); i++)
         delete processedInts->at(i);
