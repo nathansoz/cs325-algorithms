@@ -1,3 +1,14 @@
+/*
+    File: main.cpp
+    Authors: Jen, Dale, and Nathan
+    Inputs:
+        - Nothing from stdin
+        - Requires MSS_Problems.txt to be in same directory
+    Outputs:
+        - MSS_Results.txt
+            - Contains the solved Maximum subarray problems from MSS_Problems.txt
+*/
+
 #include <fstream>
 #include <iostream>
 #include <vector>
@@ -66,6 +77,7 @@ int main()
     }
     out.close();
     std::cout << "Wrote results to MSS_Results.txt" << std::endl;
+    
     //Clean up memory
     for(uint i = 0; i < processedInts->size(); i++)
         delete processedInts->at(i);
