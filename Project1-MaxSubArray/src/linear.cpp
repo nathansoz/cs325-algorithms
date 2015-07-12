@@ -1,3 +1,10 @@
+/*
+    File: linear.cpp
+    Authors: Jen, Dale, and Nathan
+    Description: Contains functions that run linear MSS algo
+    Returns: MSS sum and (optional via reference) index values of bounds
+*/
+
 #include <vector>
 #include <algorithm> // For std::max
 
@@ -5,17 +12,17 @@
 
 int linear(std::vector<int> array)
 {
-	int maxToPoint = 0;
-	int maxToReturn = 0;
+    int maxToPoint = 0;
+    int maxToReturn = 0;
 
 
-        for(uint i = 0; i < array.size(); i++)
-	{
+    for(uint i = 0; i < array.size(); i++)
+    {
         maxToPoint = std::max(0, maxToPoint + array[i]);
-		maxToReturn = std::max(maxToPoint, maxToReturn);
-	}
+	maxToReturn = std::max(maxToPoint, maxToReturn);
+    }
 
-        return maxToReturn;
+    return maxToReturn;
 }
 
 int linear(std::vector<int> array, int &start, int &end)
