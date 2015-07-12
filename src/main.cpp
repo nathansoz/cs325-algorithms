@@ -84,6 +84,7 @@ int main()
         std::vector<int>* randNums = Helper::GenRandNums(enumValsN[i]);
         int(*funPtr1)(std::vector<int>) = &enumFunction;
         Helper::ClockMSSFunction(funPtr1, randNums);
+        delete randNums;
     }
 
     std::cout << "Running timing function for betterEnumFunction: " << std::endl;
@@ -94,6 +95,7 @@ int main()
         std::vector<int>* randNums = Helper::GenRandNums(betterEnumValsN[i]);
         int(*funPtr1)(std::vector<int>) = &betterEnumFunction;
         Helper::ClockMSSFunction(funPtr1, randNums);
+        delete randNums;
     }
 	
 
@@ -104,6 +106,7 @@ int main()
 	std::vector<int>* randNums = Helper::GenRandNums(DCValsN[i]);
 	int(*funPtr1)(std::vector<int>) = &divAndC;
 	Helper::ClockMSSFunction(funPtr1, randNums);
+        delete randNums;
     }	 
 
 
@@ -115,6 +118,7 @@ int main()
         std::vector<int>* randNums = Helper::GenRandNums(linearN[i]);
         int(*funPtr1)(std::vector<int>) = &linear;
         Helper::ClockMSSFunction(funPtr1, randNums);
+        delete randNums;
     }
 
 #endif
