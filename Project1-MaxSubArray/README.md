@@ -7,8 +7,8 @@ To Run Program
 ==============
 Simply run `./main`
 
-The program expects MSS_TestProblems.txt to be in the same directory as the executable. It will gracefully exit if this file is not found.
+The program expects MSS_Problems.txt to be in the same directory as the executable. It will gracefully exit if this file is not found.
 
 Program Output
 ==============
-The program will output a MSS_TestResults.txt file that will contain output for each algorithm as defined in the spec.
+The program will output a MSS_Results.txt file that will contain output for each algorithm as defined in the spec.
