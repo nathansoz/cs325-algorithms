@@ -36,7 +36,6 @@ int main()
         int end;
         int total = enumFunction(*(processedInts->at(i)), start, end);
         Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
-        std::cout << '\n';
     }
 
     out << "Results of betterEnumFunction: \n";
@@ -46,7 +45,6 @@ int main()
         int end;
         int total = betterEnumFunction(*(processedInts->at(i)), start, end);
         Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
-        std::cout << '\n';
     }
 
     out << "Results of D&C function: \n";
@@ -56,7 +54,6 @@ int main()
         int end;
         int total = divAndC(*(processedInts->at(i)), start, end);
         Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
-        std::cout << '\n';
     }
     
     out << "Results of linear function: \n";
@@ -66,10 +63,9 @@ int main()
         int end;
         int total = linear(*(processedInts->at(i)), start, end);
         Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
-		std::cout << '\n';
     }
     out.close();
-
+    std::cout << "Wrote results to MSS_TestResults.txt" << std::endl;
     //Clean up memory
     for(uint i = 0; i < processedInts->size(); i++)
         delete processedInts->at(i);
