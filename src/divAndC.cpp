@@ -1,7 +1,6 @@
 #include "../include/divAndC.h"
-#include <climits>
 
-int divAndC(std::vector<int> vec)
+int divAndC(std::vector <int> vec)
 {
 	int start = 0;
 	int end = vec.size() - 1;
@@ -10,6 +9,8 @@ int divAndC(std::vector<int> vec)
 
 int divAndC(std::vector <int> vec, int &start, int &end)
 {
+	start = 0;
+	end = vec.size() - 1;
 	maxSub ms;
 	ms = findMaxSub(vec, start, end);
 	start = ms.start;

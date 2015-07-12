@@ -85,6 +85,17 @@ int main()
         int(*funPtr1)(std::vector<int>) = &betterEnumFunction;
         Helper::ClockMSSFunction(funPtr1, randNums);
     }
+	
+
+    std::cout << "Running timing function for D&C function: " << std::endl;
+    int DCValsN[] = {15000, 20000 , 25000, 30000, 35000, 40000, 45000, 50000, 55000, 60000};
+    for(int i = 0; i < 10; i++)
+    {
+	std::vector<int>* randNums = Helper::GenRandNums(DCValsN[i]);
+	int(*funPtr1)(std::vector<int>) = &divAndC;
+	Helper::ClockMSSFunction(funPtr1, randNums);
+    }	 
+
 
     std::cout << "Running timing function for linear: " << std::endl;
     int linearN[] = {10000000, 20000000, 30000000, 40000000, 50000000, 60000000, 70000000, 80000000, 90000000, 100000000};
@@ -95,6 +106,7 @@ int main()
         int(*funPtr1)(std::vector<int>) = &linear;
         Helper::ClockMSSFunction(funPtr1, randNums);
     }
+
 
 
 	return 0;
