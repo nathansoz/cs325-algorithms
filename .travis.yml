@@ -3,4 +3,4 @@ language: cpp
 compiler:
   - gcc
 
-script: make
+script: cd Project1-MaxSubArray && make
