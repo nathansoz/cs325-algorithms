@@ -6,7 +6,7 @@ struct maxSub
 	int sum;
 	int start;
 	int end;
-}
+};
 
 int divAndC(std::vector <int> vec);
 int divAndC(std::vector <int> vec, int &start, int &end);

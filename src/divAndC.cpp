@@ -1,7 +1,7 @@
-#include "divAndC.h"
+#include "../include/divAndC.h"
+#include <climits>
 
-
-int divAndC(std::vector <int> vec)
+int divAndC(std::vector<int> vec)
 {
 	int start = 0;
 	int end = vec.size() - 1;

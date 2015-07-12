@@ -5,6 +5,7 @@
 
 #include "../include/enum.h"
 #include "../include/betterEnum.h"
+#include "../include/divAndC.h"
 #include "../include/linear.h"
 #include "../include/Helper/fileUtils.h"
 #include "../include/Helper/timingRoutines.h"
@@ -45,6 +46,15 @@ int main()
         Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
         std::cout << '\n';
 	}
+        out << "Results of D&C function: \n";
+        for(uint i = 0; i < processedInts->size(); i++)
+        {
+        int start;
+        int end;
+        int total = divAndC(*(processedInts->at(i)), start, end);
+        Helper::WriteResultsToFile(out, *processedInts->at(i), start, end, total);
+        std::cout << '\n';
+        }
 	out << "Results of linear function: \n";
 	for(uint i = 0; i < processedInts->size(); i++)
 	{
