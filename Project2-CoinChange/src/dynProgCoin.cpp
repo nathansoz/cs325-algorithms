@@ -2,7 +2,7 @@
 #include <iostream>
 #include "../include/dynProgCoin.h"
 
-int dynProgCoin(std::vector<int> coins, int changeVal)
+int dynProgCoin(std::vector<int> &coins, int changeVal, std::vector<int> &returnCoinCount)
 {
     int **coinCount = new int*[changeVal + 1];
     int *results = new int[changeVal + 1];
@@ -15,6 +15,9 @@ int dynProgCoin(std::vector<int> coins, int changeVal)
         for(int j = 0; j < coins.size(); j++)
             coinCount[i][j] = 0;
     }
+
+    //create needed base coinCount
+    coinCount[1][0] = 1;
 
 
     for(int i = 2; i <= changeVal; i++)
@@ -42,18 +45,30 @@ int dynProgCoin(std::vector<int> coins, int changeVal)
                      }
                      else
                      {
-                         coinCount[i][j - lastCoinIndex]--;
+                         coinCount[i][lastCoinIndex]--;
                          coinCount[i][j]++;
                          lastCoinIndex = j;
                      }
                  }
             }
         }
+
+        for(int j = 0; j < coins.size(); j++)
+            coinCount[i][j] += coinCount[i - coins.at(maxJ)][j];
+
         results[i] = min;
     }
 
     for(int i = 0; i < coins.size(); i++)
-        std::cout << coinCount[changeVal][i] << '\n';
+        returnCoinCount.push_back(coinCount[changeVal][i]);
+
+    for(int i = 0; i < (changeVal + 1); i++)
+    {
+        delete[] coinCount[i];
+    }
+
+    delete[] coinCount;
+    delete[] results;
 
     return results[changeVal];
 }
