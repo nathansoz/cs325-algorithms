@@ -1,20 +1,87 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
+#include <string>
 
+#include <boost/filesystem.hpp>
 #include "../include/dynProgCoin.h"
+#include "../include/Helper/fileUtils.h"
 
-int main()
+
+void PrintHelp()
 {
-    std::vector<int> test;
-    test.push_back(1);
-    test.push_back(2);
-    test.push_back(5);
+    std::cout << "CoinCount 1.0; Copyright (C) 2015 Jen, Dale, Nathan" << std::endl;
+    std::cout << "Usage: CoinCount [file]" << std::endl;
+    std::cout << "-h --help    display this help" << std::endl;
+}
 
-    int test1 = 10;
+int main(int argc, char* argv[])
+{
+    std::string path;
 
-    std::vector<int> ret;
+    if(argc != 2)
+    {
+        std::cout << "Error! This program takes exactly 1 argument. Printing usage:" << std::endl << std::endl;
+        PrintHelp();
+        exit(1);
+    }
+    else
+    {
+        if(std::string(argv[1]) == "-h" || std::string(argv[1]) == "--help")
+        {
+            PrintHelp();
+            exit(0);
+        }
+        else
+            path = std::string(argv[1]);
+    }
 
-    int test2 = dynProgCoin(test, test1, ret);
+    boost::filesystem::path boostPath(path);
+    boost::filesystem::path boostOutPath =
+            boostPath.parent_path() / boost::filesystem::path(boostPath.stem() + "change" + boostPath.extension());
 
-    std::cout << test2 << '\n';
+    if(!boost::filesystem::exists(boostPath))
+    {
+        std::cout << "The file at: " << path << " could not be found." << std::endl;
+        exit(1);
+    }
+
+    std::ifstream inFile;
+    inFile.open(path);
+    if(!inFile.is_open())
+    {
+        std::cout << "The file at: " << path << " could not be opened." << std::endl;
+        inFile.close();
+        exit(1);
+    }
+
+    //Grab the info we need from the file
+    std::vector<std::vector<int>> coinLists;
+    std::vector<int> coinTotals;
+    Helper::processCoinFile(inFile, coinLists, coinTotals);
+
+    //Give back the file handle to the OS
+    inFile.close();
+
+    std::ofstream outStream;
+    outStream.open(boostOutPath.native_file_string());
+    if(!outStream.is_open())
+    {
+        std::cout << "Cannot open " << boostOutPath << " for writing. Check the permissions of the directory." << std::endl;
+        outStream.close();
+        exit(1);
+    }
+
+    for(int i = 0; i < coinLists.size(); i++)
+    {
+        std::vector<int> returnCoinCount;
+        int total = dynProgCoin(coinLists.at(i), coinTotals.at(i), returnCoinCount);
+
+        Helper::WriteResultsToFile(outStream, returnCoinCount, total);
+    }
+
+    outStream.close();
+
+
+
 }

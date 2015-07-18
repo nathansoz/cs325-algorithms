@@ -2,6 +2,6 @@ CC=g++
 CFLAGS=-Wall -pedantic -std=c++0x
 
 all:
-	$(CC) $(CFLAGS) src/dynProgCoin.cpp src/main.cpp -o main
+	$(CC) $(CFLAGS) src/dynProgCoin.cpp src/main.cpp -o main -lboost_system -lboost_filesystem
 clean:
 	rm -f main
