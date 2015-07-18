@@ -62,13 +62,17 @@ int dynProgCoin(std::vector<int> &coins, int changeVal, std::vector<int> &return
     for(int i = 0; i < coins.size(); i++)
         returnCoinCount.push_back(coinCount[changeVal][i]);
 
+    //Set the return value so that we can clean up the memory
+    int retVal = results[changeVal];
+
+    //Memory Cleanup section
     for(int i = 0; i < (changeVal + 1); i++)
     {
         delete[] coinCount[i];
     }
-
     delete[] coinCount;
     delete[] results;
+    //End Cleanup
 
-    return results[changeVal];
+    return retVal;
 }
