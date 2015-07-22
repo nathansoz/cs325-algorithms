@@ -5,6 +5,8 @@
 
 #include <boost/filesystem.hpp>
 #include "../include/dynProgCoin.h"
+#include "../include/changegreedy.h"
+#include "../include/changeslow.h"
 #include "../include/Helper/fileUtils.h"
 
 
@@ -72,6 +74,25 @@ int main(int argc, char* argv[])
         exit(1);
     }
 
+    outStream << "Results from the brute-force Solution\n";
+    for(int i = 0; i < coinLists.size(); i++)
+    {
+        std::vector<int> returnCoinCount;
+        int total = changeslow(coinLists.at(i), coinTotals.at(i), returnCoinCount);
+
+        Helper::WriteResultsToFile(outStream, returnCoinCount, total);
+    }
+
+    outStream << "Results from the greedy Solution\n";
+    for(int i = 0; i < coinLists.size(); i++)
+    {
+        std::vector<int> returnCoinCount;
+        int total = greedyCoin(coinLists.at(i), coinTotals.at(i), returnCoinCount);
+
+        Helper::WriteResultsToFile(outStream, returnCoinCount, total);
+    }
+
+    outStream << "Results from the Dynamic Programming Solution\n";
     for(int i = 0; i < coinLists.size(); i++)
     {
         std::vector<int> returnCoinCount;

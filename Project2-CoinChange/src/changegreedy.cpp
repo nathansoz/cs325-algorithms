@@ -2,16 +2,20 @@
 #include <vector>
 #include <climits>
 #include <algorithm>
-#include "changegreedy.h"
+#include "../include/changegreedy.h"
 
 int greedyCoin(std::vector <int> &coins, int changeVal, std::vector <int> &returnCoinCount)
 {
 	int sum = 0;
-	std::vector <int> returnCoinCount(coins.size(), 0);
+	//Doesn't work in gcc
+	//std::vector <int> returnCoinCount(coins.size(), 0);
+
+	for(int i = 0; static_cast<int>(i < coins.size()); i++)
+		returnCoinCount.push_back(0);
 
 	while (changeVal > 0)
 	{
-		for (int i = coins.size() - 1; i >= 0; i--)
+		for (int i = static_cast<int>(coins.size() - 1); i >= 0; i--)
 		{
 			int change = 0;
 
