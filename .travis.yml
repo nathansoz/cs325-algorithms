@@ -3,4 +3,6 @@ language: cpp
 compiler:
   - gcc
 
-script: cd Project1-MaxSubArray && make
+script:
+  - cd Project1-MaxSubArray && make
+  - cd Project2-CoinChange && make && ./main Coin1.txt && cat Coin1change.txt
