@@ -3,6 +3,10 @@ language: cpp
 compiler:
   - gcc
 
+before_script:
+  - sudo apt-get update -qq
+  - sudo apt-get -y install libboost-dev
+
 script:
   - cd Project1-MaxSubArray && make
   - cd ../Project2-CoinChange && make && ./main Coin1.txt && cat Coin1change.txt
