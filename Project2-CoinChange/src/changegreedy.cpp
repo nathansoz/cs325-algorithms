@@ -10,12 +10,12 @@ int greedyCoin(std::vector <int> &coins, int changeVal, std::vector <int> &retur
 	//Doesn't work in gcc
 	//std::vector <int> returnCoinCount(coins.size(), 0);
 
-	for(int i = 0; static_cast<int>(i < coins.size()); i++)
+	for(uint i = 0; i < coins.size(); i++)
 		returnCoinCount.push_back(0);
 
 	while (changeVal > 0)
 	{
-		for (int i = static_cast<int>(coins.size() - 1); i >= 0; i--)
+		for (unsigned long i = coins.size() - 1; i >= 0; i--)
 		{
 			int change = 0;
 
@@ -29,7 +29,7 @@ int greedyCoin(std::vector <int> &coins, int changeVal, std::vector <int> &retur
 		}
 	}
 
-	for (int j = 0; j < returnCoinCount.size(); j++)
+	for (uint j = 0; j < returnCoinCount.size(); j++)
 		sum += returnCoinCount[j];
 
 	return sum;

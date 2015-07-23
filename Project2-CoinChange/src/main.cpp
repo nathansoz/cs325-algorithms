@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
     }
 
     outStream << "Results from the brute-force Solution\n";
-    for(int i = 0; i < coinLists.size(); i++)
+    for(uint i = 0; i < coinLists.size(); i++)
     {
         std::vector<int> returnCoinCount;
         int total = changeslow(coinLists.at(i), coinTotals.at(i), returnCoinCount);
@@ -84,7 +84,7 @@ int main(int argc, char* argv[])
     }
 
     outStream << "Results from the greedy Solution\n";
-    for(int i = 0; i < coinLists.size(); i++)
+    for(uint i = 0; i < coinLists.size(); i++)
     {
         std::vector<int> returnCoinCount;
         int total = greedyCoin(coinLists.at(i), coinTotals.at(i), returnCoinCount);
@@ -93,7 +93,7 @@ int main(int argc, char* argv[])
     }
 
     outStream << "Results from the Dynamic Programming Solution\n";
-    for(int i = 0; i < coinLists.size(); i++)
+    for(uint i = 0; i < coinLists.size(); i++)
     {
         std::vector<int> returnCoinCount;
         int total = dynProgCoin(coinLists.at(i), coinTotals.at(i), returnCoinCount);

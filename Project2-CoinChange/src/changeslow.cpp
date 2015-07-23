@@ -3,14 +3,14 @@
 int changeslow(std::vector<int> coins, int changeVal, std::vector<int> &ChangeCoinsUsed)
 {
 	changeSet bestSet;
-	for (int i = 0; i < coins.size(); i++)
+	for (uint i = 0; i < coins.size(); i++)
 	{
 		bestSet.coinsUsed.push_back(0);
 	}
 	bestSet.amount = INT_MAX;
 
 	changeSet curSet;
-	for (int i = 0; i < coins.size(); i++)
+	for (uint i = 0; i < coins.size(); i++)
 	{
 		curSet.coinsUsed.push_back(0);
 	}
@@ -19,7 +19,7 @@ int changeslow(std::vector<int> coins, int changeVal, std::vector<int> &ChangeCo
 
 	bruteChange(changeVal, coins, bestSet, curSet);
 
-	for (int i = 0; i < coins.size(); i++)
+	for (uint i = 0; i < coins.size(); i++)
 	{
 		ChangeCoinsUsed.push_back(bestSet.coinsUsed[i]);
 	}

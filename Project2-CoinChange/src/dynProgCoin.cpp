@@ -12,7 +12,7 @@ int dynProgCoin(std::vector<int> &coins, int changeVal, std::vector<int> &return
     for(int i = 0; i < changeVal + 1; i++)
     {
         coinCount[i] = new int[coins.size()];
-        for(int j = 0; j < coins.size(); j++)
+        for(uint j = 0; j < coins.size(); j++)
             coinCount[i][j] = 0;
     }
 
@@ -26,7 +26,7 @@ int dynProgCoin(std::vector<int> &coins, int changeVal, std::vector<int> &return
         int min = INT_MAX;
         int maxJ = -1;
 
-        for(int j = 0; j < coins.size(); j++)
+        for(uint j = 0; j < coins.size(); j++)
         {
             if(coins.at(j) <= i)
             {
@@ -53,13 +53,13 @@ int dynProgCoin(std::vector<int> &coins, int changeVal, std::vector<int> &return
             }
         }
 
-        for(int j = 0; j < coins.size(); j++)
+        for(uint j = 0; j < coins.size(); j++)
             coinCount[i][j] += coinCount[i - coins.at(maxJ)][j];
 
         results[i] = min;
     }
 
-    for(int i = 0; i < coins.size(); i++)
+    for(uint i = 0; i < coins.size(); i++)
         returnCoinCount.push_back(coinCount[changeVal][i]);
 
     //Set the return value so that we can clean up the memory
