@@ -10,6 +10,15 @@
 #include "../include/Helper/fileUtils.h"
 
 
+
+#define ALGO 1 //ChangeSlow
+//#define ALGO 2 //ChangeGreedy
+//#define ALGO 3 //Dynamic Programming
+
+#ifndef ALGO
+#define ALGO 3
+#endif
+
 void PrintHelp()
 {
     std::cout << "CoinCount 1.0; Copyright (C) 2015 Jen, Dale, Nathan" << std::endl;
@@ -75,6 +84,7 @@ int main(int argc, char* argv[])
         exit(1);
     }
 
+#if ALGO == 1
     outStream << "Results from the brute-force Solution\n";
     for(uint i = 0; i < coinLists.size(); i++)
     {
@@ -83,7 +93,7 @@ int main(int argc, char* argv[])
 
         Helper::WriteResultsToFile(outStream, returnCoinCount, total);
     }
-
+#elif ALGO == 2
     outStream << "Results from the greedy Solution\n";
     for(uint i = 0; i < coinLists.size(); i++)
     {
@@ -92,7 +102,7 @@ int main(int argc, char* argv[])
 
         Helper::WriteResultsToFile(outStream, returnCoinCount, total);
     }
-
+#elif ALGO == 3
     outStream << "Results from the Dynamic Programming Solution\n";
     for(uint i = 0; i < coinLists.size(); i++)
     {
@@ -101,7 +111,7 @@ int main(int argc, char* argv[])
 
         Helper::WriteResultsToFile(outStream, returnCoinCount, total);
     }
-
+#endif
     outStream.close();
 
 
