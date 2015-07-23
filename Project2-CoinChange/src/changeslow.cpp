@@ -1,5 +1,5 @@
 #include "../include/changeslow.h"
- 
+
 int changeslow(std::vector<int> coins, int changeVal, std::vector<int> &ChangeCoinsUsed)
 {
 	changeSet bestSet;
@@ -38,6 +38,11 @@ void bruteChange(int changeVal, std::vector<int> coins, changeSet &bestSet, chan
 			bestSet.amount = curSet.amount;
 			bestSet.coinsUsed = curSet.coinsUsed;
 		}
+		return;
+	}
+
+	if (curSet.amount > bestSet.amount)
+	{
 		return;
 	}
 
