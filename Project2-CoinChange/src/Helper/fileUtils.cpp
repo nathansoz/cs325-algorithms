@@ -66,6 +66,8 @@ void Helper::processCoinFile(std::ifstream &inStream, std::vector<std::vector<in
         else
             returnTotalValue.push_back(atoi(CoinFileLines->at(i).c_str()));
     }
+
+    delete CoinFileLines;
 }
 
 void Helper::WriteResultsToFile(std::ofstream &outStream, std::vector<int>& coinCount, int total)

@@ -4,7 +4,7 @@
 #include <algorithm>
 #include "../include/changegreedy.h"
 
-int greedyCoin(std::vector <int> &coins, int changeVal, std::vector <int> &returnCoinCount)
+int greedyCoin(std::vector<int> &coins, int changeVal, std::vector<int> &returnCoinCount)
 {
 	int sum = 0;
 	//Doesn't work in gcc
@@ -15,7 +15,7 @@ int greedyCoin(std::vector <int> &coins, int changeVal, std::vector <int> &retur
 
 	while (changeVal > 0)
 	{
-		for (unsigned long i = coins.size() - 1; i >= 0; i--)
+		for (long i = coins.size() - 1; i >= 0; i--)
 		{
 			int change = 0;
 
