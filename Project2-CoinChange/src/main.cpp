@@ -39,8 +39,9 @@ int main(int argc, char* argv[])
     }
 
     boost::filesystem::path boostPath(path);
+
     boost::filesystem::path boostOutPath =
-            boostPath.parent_path() / boost::filesystem::path(boostPath.stem() + "change" + boostPath.extension());
+            boostPath.parent_path() / boost::filesystem::path(boostPath.stem().append("change").append(boostPath.extension()));
 
     if(!boost::filesystem::exists(boostPath))
     {
