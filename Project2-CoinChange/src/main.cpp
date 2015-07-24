@@ -8,12 +8,13 @@
 #include "../include/changegreedy.h"
 #include "../include/changeslow.h"
 #include "../include/Helper/fileUtils.h"
+#include "../include/Helper/timingRoutines.h"
 
+#define TIMING 0
 
-
-#define ALGO 1 //ChangeSlow
+//#define ALGO 1 //ChangeSlow
 //#define ALGO 2 //ChangeGreedy
-//#define ALGO 3 //Dynamic Programming
+#define ALGO 3 //Dynamic Programming
 
 #ifndef ALGO
 #define ALGO 3
@@ -83,6 +84,31 @@ int main(int argc, char* argv[])
         outStream.close();
         exit(1);
     }
+
+#if TIMING == 1
+#if ALGO == 1
+    std::cout << "Brute Results" << std::endl;
+    for(uint i = 0; i < coinLists.size(); i++)
+    {
+        std::vector<int> returnCoinCount;
+        Helper::ClockTimeFunction(changeslow, coinLists.at(i), coinTotals.at(i), returnCoinCount);
+    }
+#else
+    std::cout << "Greedy Results" << std::endl;
+    for(uint i = 0; i < coinLists.size(); i++)
+    {
+        std::vector<int> returnCoinCount;
+        Helper::ClockTimeFunction(greedyCoin, coinLists.at(i), coinTotals.at(i), returnCoinCount);
+    }
+    std::cout << "DynProg Results" << std::endl;
+    for(uint i = 0; i < coinLists.size(); i++)
+    {
+        std::vector<int> returnCoinCount;
+        Helper::ClockTimeFunction(dynProgCoin, coinLists.at(i), coinTotals.at(i), returnCoinCount);
+    }
+#endif
+
+#endif
 
 #if ALGO == 1
     outStream << "Results from the brute-force Solution\n";

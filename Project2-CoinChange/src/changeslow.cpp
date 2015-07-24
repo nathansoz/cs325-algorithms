@@ -1,6 +1,6 @@
 #include "../include/changeslow.h"
 
-int changeslow(std::vector<int> coins, int changeVal, std::vector<int> &ChangeCoinsUsed)
+int changeslow(std::vector<int> &coins, int changeVal, std::vector<int> &ChangeCoinsUsed)
 {
 	changeSet bestSet;
 	for (uint i = 0; i < coins.size(); i++)

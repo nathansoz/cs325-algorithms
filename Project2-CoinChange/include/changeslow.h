@@ -9,6 +9,6 @@ struct changeSet{
 	std::vector<int> coinsUsed;
 };
 
-int changeslow(std::vector<int> coins, int changeVal, std::vector<int> &ChangeCoinsUsed);
+int changeslow(std::vector<int> &coins, int changeVal, std::vector<int> &ChangeCoinsUsed);
 
 void bruteChange(int changeVal, std::vector<int> coins, changeSet &bestSet, changeSet curSet);
