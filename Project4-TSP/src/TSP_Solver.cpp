@@ -1,0 +1,208 @@
+#include <vector>
+#include <cmath>
+
+#include "../include/TSP_Solver.h"
+
+//tmp debugging header
+#include <iostream>
+#include <string.h>
+#include <limits.h>
+
+//Public Implementation HERE
+
+
+
+
+TSP_Solver::TSP_Solver(std::istream &inFile)
+{
+    //Init heap objects
+    this->cities = new std::vector<TSP_City*>;
+
+    std::vector<std::string>* fileLines = this->readLinesFromFile(inFile);
+    PopulateCities(fileLines);
+
+    //cleanup temp objects
+    delete fileLines;
+}
+
+TSP_Solver::~TSP_Solver()
+{
+    for(int i = 0; i < cities->size(); i++)
+        delete cities->at(i);
+
+    delete cities;
+}
+
+void TSP_Solver::SolveWithNearestNeighbor()
+{
+    int bestResult = INT_MAX;
+
+    std::cout << "We will compute " << cities->size() << " passes." << std::endl;
+
+    for(int i = 0; i < cities->size(); i++)
+    {
+        std::cout << "Pass " << i << std::endl;
+        int result = NearestNeighborFromCity(cities->at(i));
+        if(result < bestResult)
+            bestResult = result;
+        this->ResetVisited();
+        std::cout << "The current best result is " << bestResult << std::endl;
+    }
+
+
+}
+
+//Private Implementation HERE
+
+//probably don't have to do this check.. consider using a counter instead.
+bool TSP_Solver::AllCitiesVisited()
+{
+    for(int i = 0; i < cities->size(); i++) {
+        if (cities->at(i)->visited)
+            continue;
+        else
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int TSP_Solver::ComputeDistance(int x1, int y1, int x2, int y2)
+{
+    double trueDistance = sqrt(pow((x1 - x2), 2) + pow((y1 - y2), 2));
+    return static_cast<int>(lrint(trueDistance));
+}
+
+int TSP_Solver::NearestNeighborFromCity(TSP_City *city)
+{
+    if(cities->size() == 0)
+        return -1;
+
+    TSP_City* currentCity = city;
+    int distanceTraveled = 0;
+    int visitedCities = 0;
+
+    do
+    {
+        TSP_City* nextCity = FindClosestCity(currentCity);
+
+        if(nextCity == NULL)
+            break;
+
+        distanceTraveled += ComputeDistance(currentCity->x, currentCity->y,
+                                            nextCity->x, nextCity->y);
+
+        currentCity->visited = true;
+        currentCity = nextCity;
+        visitedCities++;
+
+
+    } while(visitedCities < cities->size());
+
+    return distanceTraveled;
+}
+
+void TSP_Solver::PopulateCities(std::vector<std::string> *fileLines)
+{
+    std::vector<std::vector<int>*>* values = this->vectorizeLines(fileLines);
+
+    for(int i = 0; i < values->size(); i++)
+    {
+        std::vector<int> *curLine = values->at(i);
+        //Corner case of blank line in file
+        if(curLine->size() == 0)
+            continue;
+
+        TSP_City *city = new TSP_City();
+
+        city->id = curLine->at(CITY_ID);
+        city->x = curLine->at(X_COORD);
+        city->y = curLine->at(Y_COORD);
+        city->visited = false;
+
+        this->cities->push_back(city);
+    }
+
+    for(int i = 0; i < values->size(); i++)
+        delete values->at(i);
+    delete values;
+}
+
+TSP_City* TSP_Solver::FindClosestCity(TSP_City *city)
+{
+    TSP_City* currentCity = city;
+    TSP_City* closestCitySoFar = NULL;
+    int smallestDistance = INT_MAX;
+
+    for(int i = 0; i < cities->size(); i++)
+    {
+
+        TSP_City *potentialNextCity = cities->at(i);
+        int distanceToPotentialNextCity = ComputeDistance(currentCity->x, currentCity->y, potentialNextCity->x, potentialNextCity->y);
+
+        if(city == cities->at(i))
+            continue;
+
+        if(closestCitySoFar == NULL && !potentialNextCity->visited)
+        {
+            closestCitySoFar = cities->at(i);
+            smallestDistance = distanceToPotentialNextCity;
+        }
+        else if(distanceToPotentialNextCity < smallestDistance && !potentialNextCity->visited)
+        {
+            closestCitySoFar = potentialNextCity;
+            smallestDistance = distanceToPotentialNextCity;
+        }
+    }
+
+    return closestCitySoFar;
+}
+
+std::vector<std::string>* TSP_Solver::readLinesFromFile(std::istream& inFromFile)
+{
+    std::vector<std::string>* returnStrings = new std::vector<std::string>();
+
+    std::string curLine;
+    while(std::getline(inFromFile, curLine))
+    {
+        returnStrings->push_back(curLine);
+    }
+
+    return returnStrings;
+
+}
+
+void TSP_Solver::ResetVisited()
+{
+    for(int i = 0; i < cities->size(); i++)
+        cities->at(i)->visited = false;
+
+}
+
+std::vector<std::vector<int>*>* TSP_Solver::vectorizeLines(std::vector<std::string>* fileLines)
+{
+    std::vector<std::vector<int>*>* returnVector = new std::vector<std::vector<int>*>();
+
+    for(int i = 0; i < fileLines->size(); i++)
+        returnVector->push_back(this->spaceToInt(fileLines->at(i)));
+
+    return returnVector;
+}
+
+std::vector<int>* TSP_Solver::spaceToInt(std::string &convertString)
+{
+    std::vector<int>* returnVector = new std::vector<int>();
+    const char *cstrConvertString = convertString.c_str();
+
+    char* tmpString = strtok((char*)cstrConvertString, " ");
+    while(tmpString != NULL)
+    {
+        int tmp = atoi(tmpString);
+        returnVector->push_back(tmp);
+        tmpString = strtok(NULL, " ");
+    }
+
+    return returnVector;
+}
