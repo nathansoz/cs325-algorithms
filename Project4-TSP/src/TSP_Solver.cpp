@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string.h>
 #include <limits.h>
+#include <boost/thread.hpp>
 
 //Public Implementation HERE
 
@@ -15,6 +16,8 @@
 
 TSP_Solver::TSP_Solver(std::istream &inFile)
 {
+    this->bestResult = INT_MAX;
+
     //Init heap objects
     this->cities = new std::vector<TSP_City*>;
 
@@ -35,24 +38,42 @@ TSP_Solver::~TSP_Solver()
 
 void TSP_Solver::SolveWithNearestNeighbor()
 {
-    int bestResult = INT_MAX;
+    boost::thread* solver = new boost::thread(&TSP_Solver::threaded_SolveWithNearestNeighbor, this);
 
-    std::cout << "We will compute " << cities->size() << " passes." << std::endl;
-
-    for(int i = 0; i < cities->size(); i++)
+    for(int i = 0; i < ((60 * 4) + 30); i++)
     {
-        std::cout << "Pass " << i << std::endl;
-        int result = NearestNeighborFromCity(cities->at(i));
-        if(result < bestResult)
-            bestResult = result;
-        this->ResetVisited();
-        std::cout << "The current best result is " << bestResult << std::endl;
+        if(solver->timed_join(boost::posix_time::time_duration(0,0,1,0)))
+        {
+            std::cout << "Thread exit\n";
+            break;
+        }
+        else
+            std::cout << "Slept 1 second\n";
     }
+    solver->interrupt();
+    std::cout << "We timed out close to 5 minutes. The best result we got was: " << bestResult << std::endl;
 
 
 }
 
 //Private Implementation HERE
+
+void TSP_Solver::threaded_SolveWithNearestNeighbor()
+{
+    std::cout << "We will compute " << this->cities->size() << " passes." << std::endl;
+
+    for(int i = 0; i < cities->size(); i++)
+    {
+        std::cout << "Pass " << i << std::endl;
+        int result = NearestNeighborFromCity(cities->at(i));
+        if(result < this->bestResult)
+        {
+            this->bestResult = result;
+        }
+        this->ResetVisited();
+        std::cout << "The current best result is " << bestResult << std::endl;
+    }
+}
 
 //probably don't have to do this check.. consider using a counter instead.
 bool TSP_Solver::AllCitiesVisited()
@@ -67,6 +88,7 @@ bool TSP_Solver::AllCitiesVisited()
     }
 
     return true;
+
 }
 
 int TSP_Solver::ComputeDistance(int x1, int y1, int x2, int y2)

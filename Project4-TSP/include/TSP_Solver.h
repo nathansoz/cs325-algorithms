@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <fstream>
+#include <boost/thread.hpp>
 
 #define CITY_ID 0
 #define X_COORD 1
@@ -22,6 +23,7 @@ class TSP_Solver
 {
 private:
     std::vector<TSP_City*> *cities;
+    int bestResult;
     bool populated;
 
 
@@ -33,6 +35,7 @@ private:
     std::vector<std::string>* readLinesFromFile(std::istream&);
     std::vector<std::vector<int>*>* vectorizeLines(std::vector<std::string>* fileLines);
     std::vector<int>* spaceToInt(std::string &convertString);
+    void threaded_SolveWithNearestNeighbor();
     void ResetVisited();
 
 
