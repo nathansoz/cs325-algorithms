@@ -34,6 +34,7 @@ TSP_Solver::~TSP_Solver()
         delete cities->at(i);
 
     delete cities;
+    delete bestTour;
 }
 
 void TSP_Solver::PrintBestTour(std::ostream &out)
@@ -60,9 +61,9 @@ void TSP_Solver::SolveWithNearestNeighbor()
 
     }
     solver->interrupt();
+    solver->detach();
     std::cout << "We timed out close to 5 minutes. The best result we got was: " << bestResult << std::endl;
-
-
+    delete solver;
 }
 
 //Private Implementation HERE
@@ -83,6 +84,8 @@ void TSP_Solver::threaded_SolveWithNearestNeighbor()
             this->bestTour = workingTour;
             delete tmp;
         }
+        else
+            delete workingTour;
         this->ResetVisited();
 
         std::cout << "The current best result is " << bestResult << std::endl;
