@@ -24,7 +24,10 @@ class TSP_Solver
 private:
     std::vector<TSP_City*> *cities;
     int bestResult;
+    std::vector<int>* bestTour;
+    std::vector<int>* workingTour;
     bool populated;
+
 
 
     int ComputeDistance(int x1, int y1, int x2, int y2);
@@ -46,7 +49,7 @@ public:
     ~TSP_Solver();
 
     void SolveWithNearestNeighbor();
-
+    void PrintBestTour(std::ostream&);
 };
 
 

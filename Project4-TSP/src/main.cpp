@@ -60,7 +60,19 @@ int main(int argc, char* argv[])
     TSP_Solver solver(infile);
     infile.close();
 
+    std::ofstream outStream;
+    outStream.open(boostOutPath.native_file_string());
+    if(!outStream.is_open())
+    {
+        std::cout << "Cannot open " << boostOutPath << " for writing. Check the permissions of the directory." << std::endl;
+        outStream.close();
+        exit(1);
+    }
+
     solver.SolveWithNearestNeighbor();
+    solver.PrintBestTour(outStream);
+
+    outStream.close();
 
     return 0;
 }
