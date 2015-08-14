@@ -71,8 +71,9 @@ int main(int argc, char* argv[])
 
     solver.SolveWithNearestNeighbor();
     solver.PrintBestTour(outStream);
-
     outStream.close();
+
+    std::cout << "Wrote solution and tour to file " << boostOutPath << std::endl;
 
     return 0;
 }

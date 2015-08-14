@@ -50,19 +50,27 @@ void TSP_Solver::PrintBestTour(std::ostream &out)
 void TSP_Solver::SolveWithNearestNeighbor()
 {
     boost::thread* solver = new boost::thread(&TSP_Solver::threaded_SolveWithNearestNeighbor, this);
+    bool exitBeforeTimeout = false;
 
     for(unsigned int i = 0; i < ((60 * 4) + 30); i++)
     {
+
+
         if(solver->timed_join(boost::posix_time::time_duration(0,0,1,0)))
         {
-            //std::cout << "Thread exit\n";
+            exitBeforeTimeout = true;
             break;
         }
 
     }
     solver->interrupt();
     solver->detach();
-    std::cout << "We timed out close to 5 minutes. The best result we got was: " << bestResult << std::endl;
+
+    if(exitBeforeTimeout)
+        std::cout << "The best result we got was: " << bestResult << std::endl;
+    else
+        std::cout << "We timed out close to 5 minutes. The best result we got was: " << bestResult << std::endl;
+
     delete solver;
 }
 
