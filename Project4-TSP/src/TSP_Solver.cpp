@@ -78,7 +78,7 @@ void TSP_Solver::SolveWithNearestNeighbor()
 
 void TSP_Solver::threaded_SolveWithNearestNeighbor()
 {
-    std::cout << "We will compute " << this->cities->size() << " passes." << std::endl;
+    std::cout << "We will compute up to " << this->cities->size() << " passes (time permitting)." << std::endl;
 
     for(unsigned int i = 0; i < cities->size(); i++)
     {
