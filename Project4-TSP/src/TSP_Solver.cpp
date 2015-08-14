@@ -30,8 +30,8 @@ TSP_Solver::TSP_Solver(std::istream &inFile)
 
 TSP_Solver::~TSP_Solver()
 {
-    for(int i = 0; i < cities->size(); i++)
-        delete cities->at(i);
+    for(unsigned int i = 0; i < cities->size(); i++)
+        delete cities->at((unsigned long)i);
 
     delete cities;
     delete bestTour;
@@ -41,9 +41,9 @@ void TSP_Solver::PrintBestTour(std::ostream &out)
 {
     out << bestResult << std::endl;
 
-    for(int i = 0; i < bestTour->size(); i++)
+    for(unsigned int i = 0; i < bestTour->size(); i++)
     {
-        out << this->bestTour->at(i) << std::endl;
+        out << this->bestTour->at((unsigned long)i) << std::endl;
     }
 }
 
@@ -51,7 +51,7 @@ void TSP_Solver::SolveWithNearestNeighbor()
 {
     boost::thread* solver = new boost::thread(&TSP_Solver::threaded_SolveWithNearestNeighbor, this);
 
-    for(int i = 0; i < ((60 * 4) + 30); i++)
+    for(unsigned int i = 0; i < ((60 * 4) + 30); i++)
     {
         if(solver->timed_join(boost::posix_time::time_duration(0,0,1,0)))
         {
@@ -72,11 +72,11 @@ void TSP_Solver::threaded_SolveWithNearestNeighbor()
 {
     std::cout << "We will compute " << this->cities->size() << " passes." << std::endl;
 
-    for(int i = 0; i < cities->size(); i++)
+    for(unsigned int i = 0; i < cities->size(); i++)
     {
         this->workingTour = new std::vector<int>();
 
-        int result = NearestNeighborFromCity(cities->at(i));
+        int result = NearestNeighborFromCity(cities->at((unsigned long)i));
         if(result < this->bestResult)
         {
             this->bestResult = result;
@@ -97,8 +97,8 @@ void TSP_Solver::threaded_SolveWithNearestNeighbor()
 //probably don't have to do this check.. consider using a counter instead.
 bool TSP_Solver::AllCitiesVisited()
 {
-    for(int i = 0; i < cities->size(); i++) {
-        if (cities->at(i)->visited)
+    for(unsigned int i = 0; i < cities->size(); i++) {
+        if (cities->at((unsigned long)i)->visited)
             continue;
         else
         {
@@ -124,7 +124,7 @@ int TSP_Solver::NearestNeighborFromCity(TSP_City *city)
     TSP_City* currentCity = city;
     int distanceTraveled = 0;
 
-    for (int i = 0; i < cities->size(); i++)
+    for (unsigned int i = 0; i < cities->size(); i++)
     {
         TSP_City* nextCity = FindClosestCity(currentCity);
 
@@ -154,9 +154,9 @@ void TSP_Solver::PopulateCities(std::vector<std::string> *fileLines)
 {
     std::vector<std::vector<int>*>* values = this->vectorizeLines(fileLines);
 
-    for(int i = 0; i < values->size(); i++)
+    for(unsigned int i = 0; i < values->size(); i++)
     {
-        std::vector<int> *curLine = values->at(i);
+        std::vector<int> *curLine = values->at((unsigned long)i);
         //Corner case of blank line in file
         if(curLine->size() == 0)
             continue;
@@ -171,8 +171,8 @@ void TSP_Solver::PopulateCities(std::vector<std::string> *fileLines)
         this->cities->push_back(city);
     }
 
-    for(int i = 0; i < values->size(); i++)
-        delete values->at(i);
+    for(unsigned int i = 0; i < values->size(); i++)
+        delete values->at((unsigned long)i);
     delete values;
 }
 
@@ -182,18 +182,18 @@ TSP_City* TSP_Solver::FindClosestCity(TSP_City *city)
     TSP_City* closestCitySoFar = NULL;
     int smallestDistance = INT_MAX;
 
-    for(int i = 0; i < cities->size(); i++)
+    for(unsigned int i = 0; i < cities->size(); i++)
     {
 
-        TSP_City *potentialNextCity = cities->at(i);
+        TSP_City *potentialNextCity = cities->at((unsigned long)i);
         int distanceToPotentialNextCity = ComputeDistance(currentCity->x, currentCity->y, potentialNextCity->x, potentialNextCity->y);
 
-        if(city == cities->at(i))
+        if(city == cities->at((unsigned long)i))
             continue;
 
         if(closestCitySoFar == NULL && !potentialNextCity->visited)
         {
-            closestCitySoFar = cities->at(i);
+            closestCitySoFar = cities->at((unsigned long)i);
             smallestDistance = distanceToPotentialNextCity;
         }
         else if(distanceToPotentialNextCity < smallestDistance && !potentialNextCity->visited)
@@ -222,7 +222,7 @@ std::vector<std::string>* TSP_Solver::readLinesFromFile(std::istream& inFromFile
 
 void TSP_Solver::ResetVisited()
 {
-    for(int i = 0; i < cities->size(); i++)
+    for(unsigned int i = 0; i < cities->size(); i++)
         cities->at(i)->visited = false;
 
 }
@@ -231,8 +231,8 @@ std::vector<std::vector<int>*>* TSP_Solver::vectorizeLines(std::vector<std::stri
 {
     std::vector<std::vector<int>*>* returnVector = new std::vector<std::vector<int>*>();
 
-    for(int i = 0; i < fileLines->size(); i++)
-        returnVector->push_back(this->spaceToInt(fileLines->at(i)));
+    for(unsigned int i = 0; i < fileLines->size(); i++)
+        returnVector->push_back(this->spaceToInt(fileLines->at((unsigned long)i)));
 
     return returnVector;
 }
